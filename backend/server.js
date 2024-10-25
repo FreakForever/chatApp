@@ -15,8 +15,14 @@ const app = express();
 const server = http.createServer(app);
 
 // Enable CORS for Express routes
+const allowedOrigins = [
+    'https://strangertallkss.netlify.app', 
+    'http://localhost:5173',
+    "https://magenta-latia-67.tiiny.site/"
+];
+
 app.use(cors({
-    origin: ['https://strangertallkss.netlify.app', 'http://localhost:5173'],  
+    origin: allowedOrigins,  
     credentials: true 
 }));
 
@@ -31,9 +37,9 @@ connectToMongoDB();
 // Initialize Socket.io with CORS configuration
 const io = new Server(server, {
     cors: {
-        origin: ['https://strangertallkss.netlify.app', 'http://localhost:5173'],  
-        methods: ["GET", "POST"],         
-        credentials: true                 
+        origin: allowedOrigins,
+        methods: ["GET", "POST"],
+        credentials: true
     }
 });
 
@@ -94,15 +100,17 @@ io.on("connection", (socket) => {
     });
 });
 
+// Basic route for health check
 app.get("/", (req, res) => {
     res.send("Hello World");
 });
 
-// Routes
+// API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/messages", messageRoutes);
 
+// Start server
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

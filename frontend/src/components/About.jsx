@@ -5,6 +5,7 @@ const About = () => {
         <div className="flex flex-col min-h-screen bg-gray-900 text-white">
             <div className="flex-grow">
                 <h1 className="text-5xl font-bold mb-12 text-center">About Us</h1>
+              
 
                 <section className="max-w-5xl mx-auto px-6 mb-12 text-center">
                     <h2 className="text-4xl font-semibold mb-6">Our Mission</h2>
