@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import  { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 
@@ -6,7 +6,6 @@ const socket = io.connect("http://localhost:8000"); // Adjust the URL as needed
 
 const StrangerChat = () => {
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
     const [messageText, setMessageText] = useState("");
     const [messages, setMessages] = useState([]);
     const endOfMessagesRef = useRef(null);
