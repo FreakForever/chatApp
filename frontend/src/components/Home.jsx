@@ -36,7 +36,7 @@ const Home = () => {
             {/* Navbar */}
             <nav className="w-full py-4 px-8 flex justify-between items-center bg-violet-800 bg-opacity-90 shadow-md">
                 <div className="text-3xl font-bold text-white hover:text-violet-300 transition-colors duration-300">
-                    🌐 SStranger Chat
+                    🌐 Stranger Chat
                 </div>
                 <div>
                     {isLoggedIn() ? (
