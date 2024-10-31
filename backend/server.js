@@ -18,7 +18,8 @@ const server = http.createServer(app);
 const allowedOrigins = [
     'https://strangertallkss.netlify.app', 
     'http://localhost:5173',
-    "https://magenta-latia-67.tiiny.site/","https://chatwithyourstranger.netlify.app/"
+    "https://magenta-latia-67.tiiny.site/","https://chatwithyourstranger.netlify.app/",
+    "https://talktostranger.onrender.com"
 ];
 
 app.use(cors({
