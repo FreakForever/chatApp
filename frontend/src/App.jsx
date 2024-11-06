@@ -7,10 +7,12 @@ import Home from './components/Home';        // Import Home component
 import About from './components/About';      // Import About component
 import Services from './components/Services'; // Import Services component
 import Security from './components/Security'; // Import Security component
+import Navbar from './components/Navbar';
 
 const App = () => {
     return (
         <Router>
+            <Navbar/>
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />

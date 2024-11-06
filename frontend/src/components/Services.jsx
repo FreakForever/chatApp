@@ -2,7 +2,7 @@
 const Services = () => {
     return (
         <div className="flex flex-col min-h-screen bg-gray-900 text-white">
-            <div className="flex-grow">
+            <div className="flex-grow mt-24">
                 <h1 className="text-5xl font-bold mb-8 text-center">Our Services</h1>
                 <p className="text-lg max-w-3xl mx-auto text-center leading-relaxed mb-12">
                     We provide secure and anonymous chat services for users looking to communicate in a private and 

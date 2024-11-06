@@ -3,7 +3,7 @@
 const Security = () => {
     return (
         <div className="flex flex-col min-h-screen bg-gray-900 text-white">
-            <div className="flex-grow">
+            <div className="flex-grow mt-24">
                 <h1 className="text-5xl font-bold mb-8 text-center">Security Features</h1>
                 <p className="text-lg max-w-3xl mx-auto text-center leading-relaxed mb-12">
                     Your privacy and security are our top priorities. We use end-to-end encryption to protect your
