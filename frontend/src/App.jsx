@@ -8,6 +8,7 @@ import About from './components/About';      // Import About component
 import Services from './components/Services'; // Import Services component
 import Security from './components/Security'; // Import Security component
 import Navbar from './components/Navbar';
+import ProfilePage from './components/ProfilePage';
 
 const App = () => {
     return (
@@ -16,6 +17,7 @@ const App = () => {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/stranger-chat" element={<StrangerChat />} />
                 <Route path="/" element={<Home />} /> {/* Set Home as the default page */}

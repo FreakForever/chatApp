@@ -20,7 +20,7 @@ const Signup = () => {
         setError(null); // Reset error state on form submission
 
         try {
-            const response = await axios.post('https://chatapp-8fgd.onrender.com/api/auth/signup', formData, {
+            const response = await axios.post('http://localhost:8000/api/auth/signup', formData, {
                 withCredentials: true // Ensure cookies (e.g., JWT token) are passed
             });
 

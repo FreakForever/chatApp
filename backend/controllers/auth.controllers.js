@@ -2,6 +2,8 @@ import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
+
+// Signup
 export const signup = async (req, res) => {
     try {
         const { fullName, username, password, confirmPassword, gender } = req.body;
@@ -46,6 +48,7 @@ export const signup = async (req, res) => {
     }
 };
 
+// Login
 export const login = async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -73,12 +76,13 @@ export const login = async (req, res) => {
             maxAge: 60 * 60 * 1000,
         });
 
-        res.status(200).json({ message: "Login successful", user: user,token:token });
+        res.status(200).json({ message: "Login successful", user, token });
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });
     }
 };
 
+// Logout
 export const logout = (req, res) => {
     try {
         res.clearCookie("token", {
@@ -92,6 +96,62 @@ export const logout = (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 };
+
+// Delete User
+export const deleteUser = async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        const user = await User.findByIdAndDelete(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.status(200).json({ message: "User deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
+
+// Update User
+export const updateUser = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { newUsername, newPassword } = req.body;
+
+        // Find the user by ID
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        // Update username if provided
+        if (newUsername) {
+            user.username = newUsername;
+        }
+
+        // Update password if provided
+        if (newPassword) {
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            user.password = hashedPassword;
+        }
+
+        // Save the updated user
+        await user.save();
+
+        // Send back the updated user object without sensitive data
+        const updatedUser = user.toObject();
+        delete updatedUser.password; // Remove the password field from the response
+
+        res.status(200).json({ message: "User updated successfully", user: updatedUser });
+
+    } catch (error) {
+        console.error(error); // Log the error for debugging
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
+
+
 
 
 

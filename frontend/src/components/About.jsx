@@ -3,7 +3,7 @@
 const About = () => {
     return (
         <div className="flex flex-col min-h-screen bg-gray-900 text-white">
-            <div className="flex-grow">
+            <div className="flex-grow mt-28">
                 <h1 className="text-5xl font-bold mb-12 text-center">About Us</h1>
               
 
