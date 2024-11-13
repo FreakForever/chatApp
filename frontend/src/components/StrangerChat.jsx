@@ -2,7 +2,7 @@ import  { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 
-const socket = io.connect("http://localhost:8000"); // Adjust the URL as needed
+const socket = io.connect("https://chatapp-8fgd.onrender.com"); // Adjust the URL as needed
 
 const StrangerChat = () => {
     const navigate = useNavigate();

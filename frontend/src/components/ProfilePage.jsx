@@ -10,7 +10,7 @@ const ProfilePage = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const navigate = useNavigate();
-    const API_BASE_URL = 'http://localhost:8000/api';
+    const API_BASE_URL = 'https://chatapp-8fgd.onrender.com/api';
 
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem('user'));
