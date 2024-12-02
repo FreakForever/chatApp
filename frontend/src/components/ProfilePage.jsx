@@ -81,26 +81,26 @@ const ProfilePage = () => {
     if (!user) return null; // Render nothing if user is not loaded
 
     return (
-    <div className="flex items-center justify-center min-h-screen w-full bg-gray-100 dark:bg-gray-900">
-        <div className="max-w-md mx-auto p-4 bg-white shadow-lg rounded mt-32">
-            <h2 className="text-2xl font-bold mb-4">Profile Page</h2>
-            {success && <p className="text-green-600">{success}</p>}
-            {error && <p className="text-red-600">{error}</p>}
+    <div className="flex items-center justify-center min-h-screen w-full bg-slate-950 dark:bg-slate-900">
+        <div className="max-w-md mx-auto p-4 bg-slate-800 shadow-lg rounded-lg mt-32 border border-slate-700">
+            <h2 className="text-2xl font-bold mb-4 text-white">Profile Page</h2>
+            {success && <p className="text-green-400">{success}</p>}
+            {error && <p className="text-red-400">{error}</p>}
 
             <div className="mb-4">
                 <img
                     src={user.profilePic || 'default-profile-pic-url.jpg'}
                     alt="Profile"
-                    className="w-24 h-24 rounded-full mx-auto mb-2"
+                    className="w-24 h-24 rounded-full mx-auto mb-2 border-2 border-purple-500"
                 />
             </div>
 
             <form onSubmit={handleUpdate} className="mb-6">
                 <div className="mb-4">
-                    <label className="block text-gray-700">Current Password</label>
+                    <label className="block text-white mb-2">Current Password</label>
                     <input
                         type="password"
-                        className="w-full px-4 py-2 border rounded"
+                        className="w-full px-4 py-2 bg-slate-700 text-white border border-slate-600 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
                         required
@@ -108,41 +108,42 @@ const ProfilePage = () => {
                 </div>
 
                 <div className="mb-4">
-                    <label className="block text-gray-700">New Username</label>
+                    <label className="block text-white mb-2">New Username</label>
                     <input
                         type="text"
-                        className="w-full px-4 py-2 border rounded"
+                        className="w-full px-4 py-2 bg-slate-700 text-white border border-slate-600 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
                         value={newUsername}
                         onChange={(e) => setNewUsername(e.target.value)}
                     />
                 </div>
 
                 <div className="mb-4">
-                    <label className="block text-gray-700">New Password</label>
+                    <label className="block text-white mb-2">New Password</label>
                     <input
                         type="password"
-                        className="w-full px-4 py-2 border rounded"
+                        className="w-full px-4 py-2 bg-slate-700 text-white border border-slate-600 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
                 </div>
 
-                <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded">
+                <button 
+                    type="submit" 
+                    className="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition-colors duration-300 transform hover:scale-105"
+                >
                     Update Profile
                 </button>
             </form>
 
             <button
                 onClick={handleDeleteAccount}
-                className="w-full bg-red-600 text-white py-2 rounded"
+                className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition-all duration-300 transform hover:scale-105"
             >
                 Delete Account
             </button>
         </div>
-        </div>
+    </div>
     );
 };
 
 export default ProfilePage;
-
-

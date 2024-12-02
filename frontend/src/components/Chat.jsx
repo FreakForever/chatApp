@@ -1,4 +1,4 @@
-import  { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ const Chat = () => {
     const [messages, setMessages] = useState([]);
     const [messageText, setMessageText] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
-    const [navbarColor, setNavbarColor] = useState("bg-gray-800");
+    const [navbarColor, setNavbarColor] = useState("bg-gradient-to-r from-indigo-900 to-purple-900");
     const [loading, setLoading] = useState(false);
     const [notification, setNotification] = useState("");
     const [loadingTime, setLoadingTime] = useState(0);
@@ -121,11 +121,9 @@ const Chat = () => {
 
     useEffect(() => {
         const colors = [
-            "bg-gray-800",
-            "bg-gray-700",
-            "bg-gray-600",
-            "bg-gray-500",
-            "bg-gray-400"
+            "bg-gradient-to-r from-indigo-900 to-purple-900",
+            "bg-gradient-to-r from-blue-900 to-indigo-900",
+            "bg-gradient-to-r from-purple-900 to-blue-900"
         ];
         let currentIndex = 0;
 
@@ -157,7 +155,6 @@ const Chat = () => {
         }, 3000);
     };
 
-    // Create a function to get the latest message for each user
     const getLatestMessage = (username) => {
         const userMessages = messages.filter(msg => 
             (msg.from === username && msg.to === user.username) || 
@@ -167,56 +164,33 @@ const Chat = () => {
     };
 
     return (
-        <div className="flex flex-col h-screen bg-slate-500">
-            <nav className={`${navbarColor} text-white p-4 flex justify-between items-center transition-colors duration-1000`}>
+        <div className="flex flex-col h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white">
+            <nav className={`${navbarColor} text-white p-4 flex justify-between items-center shadow-lg backdrop-blur-sm bg-opacity-70 transition-all duration-1000`}>
                 <ul className="flex space-x-8">
-                    <li>
-                        <button 
-                            onClick={() => navigate("/")} 
-                            className="border border-transparent hover:border-white hover:bg-gray-700 px-2 py-1 rounded transition duration-200"
-                        >
-                            Home
-                        </button>
-                    </li>
-                    <li>
-                        <button 
-                            onClick={() => navigate("/about")} 
-                            className="border border-transparent hover:border-white hover:bg-gray-700 px-2 py-1 rounded transition duration-200"
-                        >
-                            About
-                        </button>
-                    </li>
-                    <li>
-                        <button 
-                            onClick={() => navigate("/services")} 
-                            className="border border-transparent hover:border-white hover:bg-gray-700 px-2 py-1 rounded transition duration-200"
-                        >
-                            Services
-                        </button>
-                    </li>
-                    <li>
-                        <button 
-                            onClick={() => navigate("/security")} 
-                            className="border border-transparent hover:border-white hover:bg-gray-700 px-2 py-1 rounded transition duration-200"
-                        >
-                            Security
-                        </button>
-                    </li>
+                    {["Home", "About", "Services", "Security"].map((item) => (
+                        <li key={item}>
+                            <button 
+                                onClick={() => navigate(`/${item.toLowerCase()}`)} 
+                                className="px-3 py-1 rounded-full bg-transparent hover:bg-white/10 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
+                            >
+                                {item}
+                            </button>
+                        </li>
+                    ))}
                 </ul>
                 <button 
                     onClick={handleLogout} 
-                    className="border border-transparent hover:border-white hover:bg-gray-700 px-2 py-1 rounded transition duration-200"
+                    className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-full transition-all duration-300 transform hover:scale-105 hover:rotate-3"
                 >
                     Logout
                 </button>
             </nav>
 
-
             <div className="flex items-center justify-center flex-1 p-4">
                 <div className="flex flex-col md:flex-row justify-center items-start space-y-4 md:space-y-0 md:space-x-4 w-full max-w-7xl">
                     {/* User List Box */}
-                    <div className="w-full md:w-1/3 border-r border-gray-700 p-4 bg-gray-800 bg-opacity-90 rounded-lg shadow-lg h-[600px] flex flex-col">
-                        <h3 className="text-lg font-semibold mb-4 text-gray-200">Users</h3>
+                    <div className="w-full md:w-1/3 p-4 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-2xl border border-gray-700/30 h-[600px] flex flex-col">
+                        <h3 className="text-xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Users</h3>
 
                         {/* Search Bar */}
                         <input
@@ -224,26 +198,28 @@ const Chat = () => {
                             placeholder="Search users..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full p-2 mb-4 rounded-md bg-gray-700 text-gray-300 border border-gray-600 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                            className="w-full p-3 mb-4 rounded-full bg-gray-700/50 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
                         />
 
-                        <div className="flex-grow h-[500px] overflow-y-scroll">
+                        <div className="flex-grow h-[500px] overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
                             <ul>
                                 {filteredUsers.map((u) => (
                                     <li
                                         key={u._id}
                                         onClick={() => handleUserClick(u.username)}
-                                        className="cursor-pointer hover:bg-gray-700 p-2 rounded-md flex flex-col transition duration-200 transform hover:scale-105"
+                                        className="cursor-pointer p-3 rounded-xl transition-all duration-300 hover:bg-gradient-to-r from-blue-900/30 to-purple-900/30 transform hover:scale-105 hover:shadow-lg"
                                     >
                                         <div className="flex items-center">
                                             <img
                                                 src={u.profilePic}
                                                 alt={u.username}
-                                                className="w-8 h-8 rounded-full mr-2"
+                                                className="w-10 h-10 rounded-full mr-3 border-2 border-blue-500/50 transition-transform duration-300 hover:rotate-6"
                                             />
-                                            <span className="text-gray-300">{u.username}</span>
+                                            <div>
+                                                <span className="text-white font-semibold">{u.username}</span>
+                                                <p className="text-gray-400 text-sm truncate max-w-[200px]">{getLatestMessage(u.username)}</p>
+                                            </div>
                                         </div>
-                                        <span className="text-gray-400 text-sm">{getLatestMessage(u.username)}</span> {/* Display latest message */}
                                     </li>
                                 ))}
                             </ul>
@@ -252,30 +228,30 @@ const Chat = () => {
                         {/* Random User Button */}
                         <button
                             onClick={handleRandomUserClick}
-                            className="mt-4 w-full p-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition duration-200"
+                            className="mt-4 w-full p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-xl"
                         >
                             Pick Random User
                         </button>
                         {loading && (
-                            <div className="mt-2 text-gray-300">
-                                <p>Loading...</p>
-                                <p>Elapsed Time: {loadingTime} seconds</p>
+                            <div className="mt-2 text-center">
+                                <p className="text-gray-300 animate-pulse">Loading...</p>
+                                <p className="text-gray-400">Elapsed Time: {loadingTime} seconds</p>
                             </div>
                         )}
-                        {notification && <p className="mt-2 text-green-300">{notification}</p>}
+                        {notification && <p className="mt-2 text-green-400 animate-bounce">{notification}</p>}
                     </div>
 
                     {/* Chat Box */}
-                    <div className="w-full md:w-2/3 flex flex-col bg-gray-800 bg-opacity-90 rounded-lg shadow-lg h-[600px] p-4">
-                        <h3 className="text-lg font-semibold mb-4 text-gray-200">
+                    <div className="w-full md:w-2/3 flex flex-col bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-2xl border border-gray-700/30 h-[600px] p-4">
+                        <h3 className="text-xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
                             Chat with {recipient || "Select a user"}
                         </h3>
 
-                        <div className="flex-grow overflow-y-scroll">
-                            <div className="flex flex-col space-y-2">
+                        <div className="flex-grow overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
+                            <div className="flex flex-col space-y-3">
                                 {messages.map((msg, index) => (
                                     <div key={index} className={`flex ${msg.from === user.username ? 'justify-end' : 'justify-start'}`}>
-                                        <div className={`p-2 rounded-lg ${msg.from === user.username ? 'bg-blue-600 text-white' : 'bg-gray-600 text-gray-200'}`}>
+                                        <div className={`p-3 rounded-2xl max-w-[70%] ${msg.from === user.username ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white' : 'bg-gray-700 text-gray-200'} shadow-md`}>
                                             {msg.text}
                                         </div>
                                     </div>
@@ -290,9 +266,12 @@ const Chat = () => {
                                 value={messageText}
                                 onChange={(e) => setMessageText(e.target.value)}
                                 placeholder="Type your message..."
-                                className="w-full p-2 rounded-md bg-gray-700 text-gray-300 border border-gray-600 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                                className="w-full p-3 rounded-full bg-gray-700/50 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
                             />
-                            <button type="submit" className="p-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition duration-200">
+                            <button 
+                                type="submit" 
+                                className="p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-xl"
+                            >
                                 Send
                             </button>
                         </form>
@@ -302,33 +281,5 @@ const Chat = () => {
         </div>
     );
 };
+
 export default Chat;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
