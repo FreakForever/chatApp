@@ -16,7 +16,7 @@ const Login = () => {
 
         try {
             // Make login request to your API
-            const response = await axios.post('https://chatapp-8fgd.onrender.com/api/auth/login', {
+            const response = await axios.post('https://chatapp-awll.onrender.com/api/auth/login', {
                 username,
                 password,
             });

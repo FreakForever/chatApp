@@ -19,7 +19,7 @@ const allowedOrigins = [
     'https://strangertallkss.netlify.app', 
     'http://localhost:5173',
     "https://magenta-latia-67.tiiny.site/","https://chatwithyourstranger.netlify.app/",
-    "https://talktostranger.onrender.com","https://chatapp-kohl-rho.vercel.app"
+    "https://talktostranger.onrender.com","https://chatapp-kohl-rho.vercel.app","chat-app-xi-six-44.vercel.app"
 ];
 
 app.use(cors({

@@ -3,7 +3,7 @@ import axios from "axios";
 import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 
-const socket = io.connect("https://chatapp-8fgd.onrender.com");
+const socket = io.connect("https://chatapp-awll.onrender.com");
 
 const Chat = () => {
     const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Chat = () => {
         const fetchUsers = async () => {
             if (!token) return;
             try {
-                const response = await axios.get("https://chatapp-8fgd.onrender.com/api/users", {
+                const response = await axios.get("https://chatapp-awll.onrender.com/api/users", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setUsers(response.data);
@@ -49,7 +49,7 @@ const Chat = () => {
 
     const fetchMessages = async (loggedInUsername, recipientUsername) => {
         try {
-            const response = await axios.get(`https://chatapp-8fgd.onrender.com/api/messages/${loggedInUsername}/${recipientUsername}`, {
+            const response = await axios.get(`https://chatapp-awll.onrender.com/api/messages/${loggedInUsername}/${recipientUsername}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setMessages(response.data);
